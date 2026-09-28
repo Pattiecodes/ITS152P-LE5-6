@@ -7,6 +7,11 @@ import { RegisterPage } from './components/register-page/register-page';
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'posts',
     component: ListPosts,
   },
   {

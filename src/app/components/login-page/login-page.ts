@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.authService.isLoggedIn = true;
-      this.router.navigate([this.authService.redirectUrl || '/']);
+      this.router.navigate([this.authService.redirectUrl || '/posts']);
     }
   }
 
@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
         next: (token: string) => {
           this.tokenStorage.saveToken(token);
           this.authService.isLoggedIn = true;
-          this.router.navigate([this.authService.redirectUrl || '/']);
+          this.router.navigate([this.authService.redirectUrl || '/posts']);
           window.location.reload();
         },
         error: (error) => {

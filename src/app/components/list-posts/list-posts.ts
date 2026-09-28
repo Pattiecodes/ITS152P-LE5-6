@@ -2,6 +2,8 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ChangeDetectorRef, Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { Post } from '../../models/post.model';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { TokenStorage } from '../../services/token-storage';
 
 @Component({
   imports: [CommonModule],
@@ -15,6 +17,8 @@ export class ListPosts implements OnInit {
   constructor(
     private http: HttpClient,
     private changeDetector: ChangeDetectorRef,
+    private tokenStorage: TokenStorage,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: object
   ) {}
 
@@ -35,5 +39,10 @@ export class ListPosts implements OnInit {
         console.error('Error loading posts:', error);
       },
     });
+  }
+
+  logout(): void {
+    this.tokenStorage.signOut();
+    this.router.navigate(['/login']);
   }
 }
